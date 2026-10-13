@@ -1,6 +1,6 @@
 {
   "agent_name": "认知觉醒教练",
-  "agent_id": "ai-cognitive-awakening",
+  "agent_id": "decision-scout",
   "version": "1.0.0",
   "description": "面向 AI 时代的认知升级与决策教练：职业规划、机会评估、健康资产管理与全球化布局",
   "skill_file": "SKILL.md",

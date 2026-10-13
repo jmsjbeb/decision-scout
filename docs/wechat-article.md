@@ -55,7 +55,7 @@
 
 ```markdown
 ---
-name: ai-cognitive-awakening
+name: decision-scout
 description: "AI 时代的认知觉醒与决策指南 Skill……"
 version: 1.0.0
 ---
@@ -80,7 +80,7 @@ version: 1.0.0
 ### 1. 项目目录结构设计
 
 ```text
-ai-cognitive-awakening-skill/
+decision-scout/
 ├── README.md               # 开源主文档（框架部署说明与使用指南）
 ├── SKILL.md                # 标准 Agent Skill 系统提示词与工作流规范
 ├── configs/                # 各主流 Agent 框架的 JSON 配置文件
@@ -99,7 +99,7 @@ ai-cognitive-awakening-skill/
 
 ```json
 {
-  "skill_id": "ai-cognitive-awakening",
+  "skill_id": "decision-scout",
   "name": "AI Cognitive Awakening Coaching Skill",
   "version": "1.0.0",
   "description": "AI 时代年轻人的认知觉醒、决策优化与全球套利指南",
@@ -115,7 +115,7 @@ ai-cognitive-awakening-skill/
   "name": "AI Cognitive Awakening Assistant",
   "description": "Assistant for AI-era cognitive upgrading and scouting strategy.",
   "instructions": "You are an AI Agent trained on the AI Cognitive Awakening methodology...",
-  "metadata": { "skill": "ai-cognitive-awakening", "version": "1.0.0" }
+  "metadata": { "skill": "decision-scout", "version": "1.0.0" }
 }
 ```
 
@@ -123,7 +123,7 @@ ai-cognitive-awakening-skill/
 
 ```bash
 # 第一步：进入项目目录并初始化 Git
-cd ai-cognitive-awakening-skill
+cd decision-scout
 git init
 
 # 第二步：添加文件并提交本地 Commit
@@ -131,7 +131,7 @@ git add .
 git commit -m "feat: release AI Cognitive Awakening Agent Skill for Hermes, OpenClaw, WorkBuddy & Codex"
 
 # 第三步：关联 GitHub 远程仓库（替换为你的仓库地址）
-git remote add origin git@github.com:YOUR_USERNAME/ai-cognitive-awakening-skill.git
+git remote add origin git@github.com:YOUR_USERNAME/decision-scout.git
 git branch -M main
 
 # 第四步：推送到 GitHub

@@ -1,144 +1,126 @@
-# AI Cognitive Awakening Skill
+# decision-scout
 
-> 把「AI 时代生存指南」里的顶级认知，翻译成 AI Agent 能直接读懂、直接调用的技能定义文件。
+**An agent skill that opens the map before you decide.**
 
-一个开源的 Agent Skill（技能包）：当你的 AI 助手面对**职业选择、机会评估、健康管理、全球化布局**这类问题时，它会按这套认知框架来给建议，而不是泛泛而谈的鸡汤。
+Most AI advice on big life decisions is confident nonsense. `decision-scout` replaces it with a procedure: audit your real assets → scout 3–5 unconventional paths → cross-examine them from three opposing angles → score the one you pick on three hard numbers → ship a 30-day plan.
 
-灵感来源：孙宇晨关于「AI 时代年轻人如何认知觉醒与零成本逆袭」的访谈，本文档将其中的方法论结构化、程序化，做成可被各类 Agent 框架直接加载的 Skill。
+> [中文说明 →](README.zh-CN.md)
 
----
-
-## 它解决什么问题
-
-大多数人和 AI 对话时是这样的：问「我该不该转行」→ AI 给你一堆正确的废话。
-
-这个 Skill 想做的事是把**决策过程结构化**：
-
-- 先逼你把现状**数据化**（时间、钱、健康、能力，全部落到本地 Markdown）
-- 再用「**探图**」思路，先看遍 100 种选项，消除信息不对称，而不是拍脑袋
-- 最后用三个模型「**取其中**」，评估你的**机动性**和**AI 杠杆率**
-
-认知如果没被翻译成机器读得懂的语言，就没有办法被 AI 消化和使用。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Agent Skill](https://img.shields.io/badge/agent--skill-SKILL.md-blueviolet)](SKILL.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
+[![Compatible](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20WorkBuddy%20%7C%20Hermes%20%7C%20OpenClaw%20%7C%20Codex-informational)](#compatibility)
 
 ---
 
-## 仓库结构
+## The problem
 
-```text
-ai-cognitive-awakening-skill/
-├── README.md                    # 你正在看的这份
-├── SKILL.md                     # 核心技能定义（系统提示词 + 工作流规范）
-├── LICENSE                      # MIT
-├── .gitignore
-├── configs/                     # 各主流 Agent 框架的适配配置
-│   ├── hermes_skill.json        # Hermes Agent
-│   ├── openclaw_config.json     # OpenClaw 工作流节点
-│   ├── workbuddy_agent.json     # WorkBuddy 智能体
-│   └── codex_assistant.json     # OpenAI Codex / Assistant API
-├── adapters/
-│   └── loader.py                # 通用 Python 适配器（读 SKILL.md，吐出 system prompt）
-├── examples/
-│   └── demo.py                  # 本地跑一遍看效果
-└── docs/
-    └── wechat-article.md        # 配套公众号排版文章
-```
+Ask an assistant "should I quit my job and go all-in on AI?" and you get three paragraphs of balanced nothing. The failure isn't the model's knowledge — it's that **nobody defined the procedure**.
 
----
+`decision-scout` defines it.
 
-## 快速开始
+## What it does
 
-### 方式一：直接丢给 Claude Code / WorkBuddy 这类 Agent
+Three stages, in order. It refuses to skip ahead.
 
-把 `SKILL.md` 放进你的 skills 目录即可（各框架略有差异）：
+| Stage | Output |
+|---|---|
+| **1. Audit** | A structured personal asset table: time / money / health / capability / cognition. If the table is incomplete it only asks questions — no advice. |
+| **2. Scout** | 3–5 unconventional options, each with prerequisites, minimum validation window, and cost of failure. Cross-examined from an **aggressive**, a **conservative**, and a **contrarian** viewpoint — with the disagreements spelled out. Plus a list of the information you're still missing and the cheapest way to get it. |
+| **3. Score & ship** | The chosen path scored 1–10 on **Optionality**, **AI Leverage**, and **Global / Machine-readable Reach** — then a 30-day minimum viable action list, max 5 items, each with a completion criterion. |
+
+**Hard rules baked into the skill:** never give advice without data · never promise an outcome · never hand over a single-sided conclusion on a major decision · always state the cost of a recommendation, not just the upside.
+
+## Before / after
+
+**Before**
+
+> Should I move to a cheaper city to save money?
+
+**After** (abridged — the skill produces the full table, three viewpoints, and scores)
+
+> **Audit first.** I need 4 numbers before I can answer: monthly fixed cost, income portability (can you earn remotely?), current lease/asset lock-in, and how many options you've actually priced. Here's the table to fill.
+>
+> **Scout.** Assuming remote-capable income, three paths: (a) move now, bank the delta; (b) stay one more lease cycle and convert the delta into a skill with higher AI leverage; (c) don't move — spend the delta buying optionality instead (runway, equipment, credentials). Failure costs: (a) loses your local network, harder to reverse; (b) delays savings ~12 months; (c) lowest risk, lowest upside.
+>
+> **Where the three viewpoints split** — aggressive says move now and optimize later; conservative says the savings are an illusion once you price relocation and re-networking; contrarian says the question is wrong and you should test income portability first, because that's the variable that decides all three.
+>
+> **Score** — Optionality 7/10 · AI Leverage 4/10 · Global Reach 6/10. **Weakest dimension is leverage.** 30-day plan: [5 items, each with a completion criterion]
+
+## Quick start
+
+### 1. Drop it into your agent (no code)
 
 ```bash
-# Claude Code / WorkBuddy 风格的技能目录
-mkdir -p ~/.claude/skills/ai-cognitive-awakening
-cp SKILL.md ~/.claude/skills/ai-cognitive-awakening/
+git clone https://github.com/jmsjbeb/decision-scout.git
+mkdir -p ~/.claude/skills/decision-scout
+cp decision-scout/SKILL.md ~/.claude/skills/decision-scout/
 ```
 
-之后当你说「帮我做个职业规划」「评估一下这个机会」「我该不该买房」时，Agent 会自动加载这套框架。
+Then just ask a real question — the skill loads on match.
 
-### 方式二：用适配器生成 system prompt
+### 2. Generate a system prompt for any API
 
 ```bash
 python adapters/loader.py --format system-prompt
 ```
 
-拿到输出后贴进任何支持 system prompt 的地方（OpenAI API、Claude API、本地模型、Coze、Dify 都行）。
+Stdlib only. Paste the output into OpenAI, Claude, a local model, Coze, Dify — anything that takes a system prompt.
 
-想看效果：
+### 3. Run the dashboard tool
 
 ```bash
-python examples/demo.py
+cp examples/asset-table.example.md my-assets.md
+# fill it in, then:
+python tools/dashboard.py my-assets.md -o dashboard.html
 ```
 
-### 方式三：按框架用现成配置
+Produces a single-file HTML dashboard: your asset table, the three scores as bars, and the 30-day checklist. No dependencies, no API key, nothing leaves your machine.
 
-| 框架 | 配置文件 |
+## Compatibility
+
+| Framework | Config |
 |---|---|
-| Hermes Agent | `configs/hermes_skill.json` |
-| OpenClaw | `configs/openclaw_config.json` |
+| Claude Code / Claude.ai Skills | `SKILL.md` (drop into skills dir) |
 | WorkBuddy | `configs/workbuddy_agent.json` |
-| OpenAI Codex / Assistant API | `configs/codex_assistant.json` |
+| Hermes Agent | `configs/hermes_skill.json` |
+| OpenClaw | `configs/openclaw_config.json` (3-node workflow: intake → scout → evaluate) |
+| OpenAI Codex / Assistants API | `configs/codex_assistant.json` |
 
----
+## Repo layout
 
-## 核心认知（Skill 的理论骨架）
-
-### 三大底层认知操作系统
-
-| 名称 | 一句话 |
-|---|---|
-| **孙学** | 对金钱、财富自由、科技趋势做操作系统级别的重构 |
-| **搏击理论** | 身体是承载大脑的「碳基服务器」，肌肉与心肺占寿命质量评分的 50% |
-| **黄毛理论** | 保持 Small Ego，不受传统偏见与社会嫉妒干扰，逻辑验证正确就极速执行 |
-
-### 行动策略
-
-- **探图策略**：做重大选择前，先用 AI 把「全图」打通，看遍 100 种选项再做针对性布局
-- **逐水草而居**：避免被房产、车产等重资产绑死在单一城市，保持极强机动性
-- **全球价值流动**：结合 AI 杠杆，面向全球 80 亿人类与数十亿 AI Agent 提供价值
-
-### 人机协同
-
-**90% 自动驾驶 + 10% 人类微调**。重大决策时，向三个顶尖大模型同时提问，取其中。
-
----
-
-## 适配器 API
-
-`adapters/loader.py` 提供三个函数：
-
-```python
-from adapters.loader import load_skill, to_system_prompt, to_json_config
-
-skill = load_skill()                      # 解析 SKILL.md → dict
-prompt = to_system_prompt(skill)          # → 纯文本 system prompt
-cfg = to_json_config(skill, framework="hermes")  # → 指定框架的配置 dict
+```text
+decision-scout/
+├── SKILL.md                        # the skill: hard rules + 3-stage workflow
+├── README.md / README.zh-CN.md     # EN / 中文
+├── configs/                        # per-framework adapters
+├── adapters/loader.py              # SKILL.md → system prompt / JSON config
+├── tools/dashboard.py              # asset table → single-file HTML dashboard
+├── examples/asset-table.example.md # fill-in template
+└── docs/wechat-article.md          # long-form write-up (中文)
 ```
 
-只要标准库，没有第三方依赖。
+## Design notes
 
----
+**Why "scout"?** From RTS games: you don't walk into fog of war — you send a scout first, and only then commit your units. Most bad decisions aren't bad reasoning; they're reasoning done on a map that's 90% still dark.
 
-## 免责声明
+**Why three scores instead of one?** "Is this a good idea" is unanswerable. "How much optionality does this cost, how much of it can AI do, and can it reach anyone outside my city" is answerable. The split usually shows you which one is actually killing you.
 
-本项目是对公开访谈内容的方法论**结构化提炼**，属于个人学习与工具化实践，不代表、也不构成对任何个人的评价或背书。
+**Why refuse to answer without data?** Because an assistant that answers anyway is just guessing with better vocabulary.
 
-其中的健康、投资、职业建议仅供思路参考，**不构成任何专业意见**。涉及健康请咨询医生，涉及投资与法律请咨询持牌专业人士。
+## Contributing
 
----
+Genuinely useful contributions, in order of value:
 
-## 参与贡献
+1. **Add a framework adapter** for a tool that isn't listed yet — a small JSON in `configs/` plus a row in the table.
+2. **Report where it failed.** Open an issue with the question you asked and where the output went soft. The rubric needs real counterexamples more than it needs more prose.
+3. **Add a worked example** in `examples/`.
 
-欢迎提 Issue 和 PR：
+PRs that get this listed in agent-skill directories and awesome-lists are very welcome — that's how people find it.
 
-- 补充新的框架适配配置（`configs/`）
-- 改进工作流阶段的提示词质量
-- 增加真实使用案例（`examples/`）
+## Disclaimer
 
----
+This project is a methodology framework, not advice. Nothing here is medical, financial, legal, or tax guidance — consult a licensed professional for those. The authors make no promise about any outcome.
 
 ## License
 
@@ -146,4 +128,4 @@ MIT © 2026
 
 ---
 
-> 把认知变成可执行的代码，是 AI 时代最顶级的投资。
+**If this saved you from one bad decision, a star is the cheapest way to say thanks — and it's how the next person finds it.**
