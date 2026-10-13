@@ -1,0 +1,44 @@
+{
+  "workflow_name": "AI Cognitive Awakening Co-pilot",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "intake",
+      "type": "llm",
+      "label": "数据化诊断",
+      "skill": "ai-cognitive-awakening",
+      "system_prompt_ref": "SKILL.md#阶段一",
+      "instruction": "收集用户的时间 / 资金 / 健康 / 能力 / 认知现状，输出结构化「个人资产表」。信息不全时只提问，不给建议。",
+      "next": "scout"
+    },
+    {
+      "id": "scout",
+      "type": "llm",
+      "label": "探图分析",
+      "skill": "ai-cognitive-awakening",
+      "system_prompt_ref": "SKILL.md#阶段二",
+      "instruction": "基于资产表产出 3-5 条非传统路径，用激进派 / 稳健派 / 逆向派三视角交叉评估，并列出信息缺口。禁止直接下结论。",
+      "next": "evaluate"
+    },
+    {
+      "id": "evaluate",
+      "type": "llm",
+      "label": "极速执行与评估",
+      "skill": "ai-cognitive-awakening",
+      "system_prompt_ref": "SKILL.md#阶段三",
+      "instruction": "对用户选定路径打三项分：机动性 / AI 杠杆率 / 全球化与机器可读潜力，并输出 30 天最小可行行动清单（不超过 5 条，每条带完成标准）。",
+      "next": null
+    }
+  ],
+  "routes": [
+    { "from": "intake", "to": "scout", "condition": "个人资产表已完整填写" },
+    { "from": "scout", "to": "evaluate", "condition": "用户已选定至少一条路径" }
+  ],
+  "guardrails": {
+    "no_guarantee": true,
+    "require_professional_disclaimer": ["health", "investment", "legal"],
+    "min_perspectives_for_major_decision": 2
+  },
+  "tags": ["cognition", "decision-making", "scouting"],
+  "license": "MIT"
+}

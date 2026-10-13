@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.idea/
+.vscode/
+*.swp
+
+# Secrets — 千万别把 key 提交上来
+.env
+.env.*
+*.key
+*_secret.json
+configs/local_*.json
+
+# Demo 输出
+examples/out/
+*.log
