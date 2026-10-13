@@ -94,7 +94,9 @@ decision-scout/
 ├── adapters/loader.py              # SKILL.md → system prompt / JSON 配置
 ├── tools/dashboard.py              # 资产表 → 单文件 HTML 仪表盘
 ├── examples/asset-table.example.md # 可填写模板
-└── docs/wechat-article.md          # 长文拆解（中文）
+└── docs/                           # 配套长文（中文，公众号可直接用）
+    ├── wechat-article.md                     # 主文：为什么做这个技能
+    └── wechat-article-2-如何发布到github.md   # 副文：从 0 到开源全流程
 ```
 
 ## 设计说明

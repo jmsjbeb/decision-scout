@@ -97,7 +97,9 @@ decision-scout/
 ├── adapters/loader.py              # SKILL.md → system prompt / JSON config
 ├── tools/dashboard.py              # asset table → single-file HTML dashboard
 ├── examples/asset-table.example.md # fill-in template
-└── docs/wechat-article.md          # long-form write-up (中文)
+└── docs/                           # long-form write-ups (中文 / Chinese)
+    ├── wechat-article.md                     # main: why this skill exists
+    └── wechat-article-2-如何发布到github.md   # companion: build & release walkthrough
 ```
 
 ## Design notes
