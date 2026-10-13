@@ -6,10 +6,13 @@ Most AI advice on big life decisions is confident nonsense. `decision-scout` rep
 
 > [中文说明 →](README.zh-CN.md)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Agent Skill](https://img.shields.io/badge/agent--skill-SKILL.md-blueviolet)](SKILL.md)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
-[![Compatible](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20WorkBuddy%20%7C%20Hermes%20%7C%20OpenClaw%20%7C%20Codex-informational)](#compatibility)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+![Agent Skill](https://img.shields.io/badge/agent--skill-SKILL.md-blueviolet)
+
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+![Compatible](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20WorkBuddy%20%7C%20Hermes%20%7C%20OpenClaw%20%7C%20Codex-informational)
 
 ---
 
@@ -23,11 +26,11 @@ Ask an assistant "should I quit my job and go all-in on AI?" and you get three p
 
 Three stages, in order. It refuses to skip ahead.
 
-| Stage | Output |
-|---|---|
-| **1. Audit** | A structured personal asset table: time / money / health / capability / cognition. If the table is incomplete it only asks questions — no advice. |
-| **2. Scout** | 3–5 unconventional options, each with prerequisites, minimum validation window, and cost of failure. Cross-examined from an **aggressive**, a **conservative**, and a **contrarian** viewpoint — with the disagreements spelled out. Plus a list of the information you're still missing and the cheapest way to get it. |
-| **3. Score & ship** | The chosen path scored 1–10 on **Optionality**, **AI Leverage**, and **Global / Machine-readable Reach** — then a 30-day minimum viable action list, max 5 items, each with a completion criterion. |
+| Stage               | Output                                                                                                                                                                                                                                                                                                                   |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Audit**        | A structured personal asset table: time / money / health / capability / cognition. If the table is incomplete it only asks questions — no advice.                                                                                                                                                                        |
+| **2. Scout**        | 3–5 unconventional options, each with prerequisites, minimum validation window, and cost of failure. Cross-examined from an **aggressive**, a **conservative**, and a **contrarian** viewpoint — with the disagreements spelled out. Plus a list of the information you're still missing and the cheapest way to get it. |
+| **3. Score & ship** | The chosen path scored 1–10 on **Optionality**, **AI Leverage**, and **Global / Machine-readable Reach** — then a 30-day minimum viable action list, max 5 items, each with a completion criterion.                                                                                                                      |
 
 **Hard rules baked into the skill:** never give advice without data · never promise an outcome · never hand over a single-sided conclusion on a major decision · always state the cost of a recommendation, not just the upside.
 
@@ -79,13 +82,13 @@ Produces a single-file HTML dashboard: your asset table, the three scores as bar
 
 ## Compatibility
 
-| Framework | Config |
-|---|---|
-| Claude Code / Claude.ai Skills | `SKILL.md` (drop into skills dir) |
-| WorkBuddy | `configs/workbuddy_agent.json` |
-| Hermes Agent | `configs/hermes_skill.json` |
-| OpenClaw | `configs/openclaw_config.json` (3-node workflow: intake → scout → evaluate) |
-| OpenAI Codex / Assistants API | `configs/codex_assistant.json` |
+| Framework                      | Config                                                                      |
+| ------------------------------ | --------------------------------------------------------------------------- |
+| Claude Code / Claude.ai Skills | `SKILL.md` (drop into skills dir)                                           |
+| WorkBuddy                      | `configs/workbuddy_agent.json`                                              |
+| Hermes Agent                   | `configs/hermes_skill.json`                                                 |
+| OpenClaw                       | `configs/openclaw_config.json` (3-node workflow: intake → scout → evaluate) |
+| OpenAI Codex / Assistants API  | `configs/codex_assistant.json`                                              |
 
 ## Repo layout
 
